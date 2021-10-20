@@ -143,7 +143,7 @@ $btnReiniciar.addEventListener("click", (e) => {
 
 const validarNombre = (nombre) => {
   if (nombre.value === "") {
-    alert("Ingresa un nombre valido");
+    alert("Ingresá un nombre valido");
     return true;
   }
 };

@@ -11,7 +11,11 @@
   color: red;
   font-weight: bold;
 }
-
+.contenedor-notas {
+  display: flex;
+  background-color: aquamarine;
+  padding: 10px;
+}
 .form-notas-nombre {
   display: flex;
 }
