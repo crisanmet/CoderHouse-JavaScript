@@ -4,9 +4,39 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
     <title>Calculo de Notas</title>
   </head>
   <body>
+    <h1>Sistema de carga de Notas</h1>
+    <div class="contenedor-notas">
+      <form class="form-notas">
+        <div class="form-notas-nombre">
+          <p>Nombre del Alumno</p>
+          <input type="text" name="nombre" id="nombre" autocomplete="off" />
+        </div>
+
+        <div class="form-notas-nota">
+          <p>Nota</p>
+          <input type="number" id="nota" autocomplete="off" />
+        </div>
+
+        <div class="contenedor-btn">
+          <button type="button" id="btn-agregar">Agregar nota</button>
+        </div>
+      </div>
+      <div class="contenedor-notas-agregadas">
+        <ul id="lista-notas"></ul>        
+      </div>
+      <div class="btn-calculo oculto">
+        <button type="button" id="calcular-notas">Obtener Aprobados</button>
+        <button type="reset" id="btn-reiniciar">¿Reiniciar?</button>
+        <div class="calculo-notas oculto">
+          <p>Alumnos aprobados: <em id="aprobados"></em></p>
+          <p>Alumnos desaprobados <em id="desaprobados"></em></p>
+        </div>
+      </div>
+    </form>
     <script src="main.js"></script>
   </body>
 </html>

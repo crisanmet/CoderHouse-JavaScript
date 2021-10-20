@@ -64,6 +64,14 @@ class Notas {
   }
 }
 
+const d = document;
+const $listaNotas = d.querySelector("#lista-notas");
+const $nombre = d.querySelector("#nombre");
+const $nota = d.querySelector("#nota");
+const $btnAgregar = d.querySelector("#btn-agregar");
+const $btnReiniciar = d.querySelector("#btn-reiniciar");
+const $btnCalcular = d.querySelector("#calcular-notas");
+
 //INICIALIZO ARRAY
 const notas = [];
 
@@ -91,30 +99,82 @@ const obtenerTodosAlumnos = (arr) => {
 
 const obtenerAlumnosAprobados = (alumnos) => {
   for (const alumno of alumnos) {
-    let nota = alumno.nota;
-    if (nota >= 7) {
-      console.log(`Alumno ${alumno.nombre}, Nota ${alumno.nota}`);
+    let aprobado = alumno.aprobado;
+    if (aprobado) {
+      const $div = d.createElement("div");
+      $div.className = "aprobado";
+      const $aprobados = d.querySelector("#aprobados");
+      $div.innerHTML = `<p>Alumno ${alumno.nombre} va a final. </p>
+      `;
+      $aprobados.appendChild($div);
+    } else {
+      const $div = d.createElement("div");
+      $div.className = "desaprobado";
+      const $desaprobados = d.querySelector("#desaprobados");
+      $div.innerHTML = `<p>Alumno ${alumno.nombre} tiene que recuperar. </p>
+      `;
+      $desaprobados.appendChild($div);
     }
   }
 };
 
-const nota1 = new Notas("Cristian", 10);
-const nota2 = new Notas("Maria", 4);
-const nota3 = new Notas("Hector", 2);
-const nota4 = new Notas("Camila", 8);
+$btnAgregar.addEventListener("click", (e) => {
+  e.preventDefault();
+  const nombre = validarNombre($nombre);
+  if (!nombre) {
+    const notasAgregar = new Notas($nombre.value, $nota.value);
+    agregarNotas(notasAgregar);
+    ejecutarAprobar(notasAgregar);
+    mostrarAlumnos(notasAgregar);
+    mostrarBtn(".btn-calculo");
+    limpiarInputs($nombre, $nota);
+  }
+});
 
-agregarNotas(nota1);
-agregarNotas(nota2);
-agregarNotas(nota3);
-agregarNotas(nota4);
+$btnCalcular.addEventListener("click", (e) => {
+  mostrarBtn(".calculo-notas");
+  obtenerAlumnosAprobados(notas);
+});
 
-console.log(notas);
+$btnReiniciar.addEventListener("click", (e) => {
+  ocultarBtn(".btn-calculo");
+  borrarNotas();
+});
 
-nota1.aprobar();
-nota2.aprobar();
-nota3.aprobar();
-nota4.aprobar();
+const validarNombre = (nombre) => {
+  if (nombre.value === "") {
+    alert("Ingresa un nombre valido");
+    return true;
+  }
+};
+const limpiarInputs = (nombre, nota) => {
+  nombre.value = "";
+  nota.value = "";
+};
+const ejecutarAprobar = (notas) => {
+  notas.aprobar();
+};
 
-buscarAlumno("cristian");
-obtenerTodosAlumnos(notas);
-obtenerAlumnosAprobados(notas);
+const mostrarAlumnos = (notas) => {
+  let notaLi = d.createElement("li");
+  notaLi.textContent = `Alumno: ${notas.nombre} --Nota: ${notas.nota} --Aprobado: ${notas.aprobado}`;
+  notaLi.className = "nota-li";
+  $listaNotas.appendChild(notaLi);
+};
+
+const mostrarBtn = (id) => {
+  let btn = d.querySelector(id);
+  btn.classList.remove("oculto");
+};
+
+const ocultarBtn = (id) => {
+  let btn = d.querySelector(id);
+  btn.classList.add("oculto");
+};
+
+const borrarNotas = () => {
+  const $notasBorrar = d.querySelectorAll(".nota-li");
+  for (let i = 0; i < $notasBorrar.length; i++) {
+    $notasBorrar[i].remove();
+  }
+};

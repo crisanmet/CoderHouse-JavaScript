@@ -1,0 +1,38 @@
+.oculto {
+  display: none;
+}
+
+.aprobado {
+  color: green;
+  font-weight: bold;
+}
+
+.desaprobado {
+  color: red;
+  font-weight: bold;
+}
+
+.form-notas-nombre {
+  display: flex;
+}
+.form-notas-nombre input {
+  margin: 10px;
+  width: 100px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
+}
+.form-notas-nota {
+  display: flex;
+}
+.form-notas-nota input {
+  margin: 10px;
+  width: 100px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
+}
+
+#btn-agregar {
+  border-radius: 5px;
+}
